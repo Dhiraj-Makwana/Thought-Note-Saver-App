@@ -1,0 +1,12 @@
+.NavBar {
+    font-size: 24px;
+    color: blue;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: space-evenly;
+}
