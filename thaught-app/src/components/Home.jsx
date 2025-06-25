@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useDispatch } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from "react-router-dom";
 import "./Home.css";
+import { addToThought, updateToThought } from "../Redux/thoughtSlice";
 
 const Home = () => {
   const [title, setTitle] = useState("");
@@ -8,11 +10,19 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams(); //if you want to get id from the url then use this hook
   const [thoughtId, setThoughtId] = useState(null);
   const dispatch = useDispatch();
+  const allThoughts = useSelector((state) => state.thought.thoughts);
 
   useEffect(() => {
     setThoughtId(searchParams.get("thoughtId"));
   }, [searchParams]);
 
+  useEffect(() => {
+        if(thoughtId) {
+            const thought = allThoughts.find((p) => p._id === thoughtId);
+            setTitle(thought.title);
+            setValue(thought.content)
+        }
+    }, [thoughtId, allThoughts])
 
   function createThought() {
     const thought = {
@@ -25,11 +35,11 @@ const Home = () => {
 
     if(thoughtId) {
         //update
-        dispatch(updateToThaught(thought));
+        dispatch(updateToThought(thought));
     }
     else {
         //create
-        dispatch(addToThaught(thought));
+        dispatch(addToThought(thought));
     }
 
     //after creation or updation
@@ -40,23 +50,23 @@ const Home = () => {
 
   return (
     <div>
-      <div class="home-div">
+      <div className="home-div">
         <input
-          class="input-container"
+          className="input-container"
           type="text"
           placeholder="Enter Title here..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <button onChange={createThought} id="btn-1">
+        <button onClick={createThought} id="btn-1">
           {thoughtId ? "Update My Thought" : "Create My Thought"}
         </button>
       </div>
 
-      <div class="text-div">
+      <div className="text-div">
         <textarea
-          class="text-container"
+          className="text-container"
           value={value}
           placeholder="Enter content here..."
           onChange={(e) => setValue(e.target.value)}

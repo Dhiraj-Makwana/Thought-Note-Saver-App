@@ -24,7 +24,7 @@ const router = createBrowserRouter(
       </div>
     },
     {
-      path:"/thought/:id",
+      path:"/thoughts/:id",
       element:
       <div>
         <NavBar />

@@ -1,0 +1,24 @@
+.search-input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    min-width: 600px;
+    margin-top: 2.1rem;
+}
+
+.list-of-thoughts {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 1rem;
+}
+
+.thought-card {
+    border: 1px solid yellow;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: space-evenly;
+}
